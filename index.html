@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>날씨 앱</title>
+
+  <!-- [PWA 연결 코드 시작] -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4a90e2">
+  <link rel="apple-touch-icon" href="image/icon-192.png">
+  <!-- [PWA 연결 코드 끝] -->
+
+  <!-- CSS 연결 -->
+  <link rel="stylesheet" href="CSS/style.css">
+</head>
+<body>
+
+  <!-- 날씨 앱 전체를 감싸는 상자 -->
+  <div class="weather-container">
+    
+    <!-- 1. 도시 검색 영역 -->
+    <div class="search-box">
+      <input type="text" id="city-input" placeholder="도시 이름을 영어로 입력하세요 (예: Seoul)">
+      <button id="search-btn">검색</button>
+    </div>
+
+    <!-- 2. 날씨 정보 표시 영역 -->
+    <div class="weather-info">
+      <h2 id="city-name">서울</h2>
+      <div id="weather-condition">맑음</div>
+      <h1 id="temperature">24°C</h1>
+      
+      <!-- 부가 정보 (습도, 풍속) -->
+      <div class="details">
+        <p>습도: <span id="humidity">60%</span></p>
+        <p>풍속: <span id="wind-speed">3 m/s</span></p>
+      </div>
+    </div>
+    <p id="weather-tip" class="weather-tip">오늘의 추천 팁이 여기에 표시됩니다.</p>
+  </div>
+
+  <!-- JavaScript 연결 -->
+  <script src="javascript/script.js?v=1"></script>
+
+  <!-- [PWA 서비스 워커 등록 스크립트 시작] -->
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("./sw.js")
+        .then(() => console.log("PWA 서비스 워커 등록 완료"))
+        .catch((err) => console.error("서비스 워커 등록 실패:", err));
+    }
+  </script>
+  <!-- [PWA 서비스 워커 등록 스크립트 끝] -->
+</body>
+</html>

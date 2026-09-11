@@ -1,0 +1,194 @@
+/* 1. 기본 초기화 및 폰트 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard", "Segoe UI", sans-serif;
+  -webkit-tap-highlight-color: transparent; /* 터치 시 파란 잔상 제거 */
+}
+
+/* 화면 전체 스크롤 튐 방지 및 가로 넘침 차단 */
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* 모바일에서 가로로 삐져나가는 현상 원천 차단 */
+}
+
+body {
+  min-height: 100vh;
+  min-height: 100dvh; /* 모바일 주소창 높이 동적 대응 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  /* 배경 이미지 설정 */
+  background-image: url("../image/weather-bg.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: background-image 0.5s ease-in-out;
+  
+  /* 모바일 여백 */
+  padding: 16px;
+}
+
+@media (max-height: 620px) {
+  body {
+    align-items: flex-start;
+  }
+}
+
+/* 2. 날씨 앱 컨테이너 (스마트폰 카드 스타일) */
+.weather-container {
+  width: 100%;
+  max-width: 400px; /* 화면에 꽉 차면서도 넘치지 않게 조절 */
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.15);
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* 3. 검색 박스 및 모바일 터치 최적화 */
+.search-box {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.search-box input {
+  flex: 1;
+  min-width: 0; /* flex 내부에서 input이 넘치는 현상 방지 */
+  height: 48px;
+  padding: 0 16px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.85);
+  font-size: 15px;
+  color: #222;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.search-box input:focus {
+  background: #ffffff;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.search-box button {
+  width: 68px;
+  height: 48px;
+  flex-shrink: 0; /* 버튼 크기 찌그러짐 방지 */
+  border: none;
+  border-radius: 14px;
+  background: #2563eb;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.search-box button:active {
+  transform: scale(0.96);
+  background: #1d4ed8;
+}
+
+/* 4. 날씨 정보 표시 영역 */
+.weather-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  color: #1a1a1a;
+}
+
+#city-name {
+  font-size: 26px;
+  font-weight: 700;
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+#weather-condition {
+  font-size: 16px;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 8px;
+}
+
+#temperature {
+  font-size: 52px;
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  margin: 6px 0 16px 0;
+  color: #111111;
+}
+
+/* 5. 부가 정보 (습도, 풍속 그리드) */
+.details {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 14px 10px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.details p {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333333;
+}
+
+.details span {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+/* 6. 옷차림 추천 팁 카드 */
+.weather-tip {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 14px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #1e293b;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+  word-break: keep-all;
+}
+
+/* 7. 작은 스마트폰 화면 대응 (가로 360px 이하) */
+@media (max-width: 360px) {
+  body {
+    padding: 12px;
+  }
+  .weather-container {
+    padding: 20px 14px;
+  }
+  .search-box {
+    gap: 6px;
+  }
+  .search-box button {
+    width: 60px;
+  }
+  #temperature {
+    font-size: 44px;
+  }
+  .search-box input {
+    font-size: 14px;
+  }
+}
