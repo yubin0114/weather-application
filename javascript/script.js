@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const weatherTip = document.getElementById("weather-tip");
 
   // 2. 발급받은 API 키
-  const API_KEY = "480459c15f76e96b06619623f4d77264";
+  const API_KEY = "발급받은 API키를 입력하세요.";
 
   // 3. 날씨 배경 변경 함수
   function changeBackground(weatherMain) {
